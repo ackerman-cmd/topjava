@@ -11,8 +11,11 @@ import java.util.List;
 public class DataJpaUserRepository implements UserRepository {
     private static final Sort SORT_NAME_EMAIL = Sort.by(Sort.Direction.ASC, "name", "email");
 
-    private CrudUserRepository crudRepository;
+    private final CrudUserRepository crudRepository;
 
+    public DataJpaUserRepository(CrudUserRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
 
     @Override
     public User save(User user) {
@@ -38,4 +41,5 @@ public class DataJpaUserRepository implements UserRepository {
     public List<User> getAll() {
         return crudRepository.findAll(SORT_NAME_EMAIL);
     }
+
 }
