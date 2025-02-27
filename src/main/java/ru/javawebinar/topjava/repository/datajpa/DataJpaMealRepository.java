@@ -16,6 +16,10 @@ public class DataJpaMealRepository implements MealRepository {
 
     private  CrudUserRepository crudUserRepository;
 
+    public DataJpaMealRepository(CrudMealRepository crudRepository, CrudUserRepository crudUserRepository) {
+        this.crudRepository = crudRepository;
+        this.crudUserRepository = crudUserRepository;
+    }
 
     @Override
     @Transactional

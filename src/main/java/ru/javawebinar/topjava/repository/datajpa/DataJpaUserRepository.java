@@ -13,6 +13,9 @@ public class DataJpaUserRepository implements UserRepository {
 
     private  CrudUserRepository crudRepository;
 
+    public DataJpaUserRepository(CrudUserRepository crudRepository) {
+        this.crudRepository = crudRepository;
+    }
 
     @Override
     public User save(User user) {
