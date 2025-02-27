@@ -5,8 +5,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
+import ru.javawebinar.topjava.configuration.ApplicationConfig;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.web.meal.MealRestController;
 
@@ -22,12 +24,15 @@ import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalTime;
 
 public class MealServlet extends HttpServlet {
 
-    private ConfigurableApplicationContext springContext;
+    private AnnotationConfigApplicationContext springContext;
     private MealRestController mealController;
 
     @Override
     public void init() {
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
+        springContext = new AnnotationConfigApplicationContext();
+        springContext.getEnvironment().setActiveProfiles("datajpa", "jdbc");
+        springContext.register(ApplicationConfig.class);
+        springContext.refresh();
         mealController = springContext.getBean(MealRestController.class);
     }
 
