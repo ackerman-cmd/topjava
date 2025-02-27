@@ -3,6 +3,9 @@ package ru.javawebinar.topjava.model;
 import jdk.jfr.Name;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -40,6 +43,8 @@ public class Meal extends AbstractBaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @NotNull
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     public Meal() {
