@@ -20,7 +20,7 @@ public class MealService {
 
     private final MealRepository repository;
 
-    public MealService(@Autowired @Qualifier("jpaMealRepository") MealRepository repository) {
+    public MealService(@Qualifier("jpaMealRepository") MealRepository repository) {
         this.repository = repository;
     }
 

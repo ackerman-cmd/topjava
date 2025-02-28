@@ -12,10 +12,11 @@ import java.util.List;
 @Repository
 public class DataJpaMealRepository implements MealRepository {
 
-    private  CrudMealRepository crudRepository;
+    private final  CrudMealRepository crudRepository;
 
-    private  CrudUserRepository crudUserRepository;
+    private final  CrudUserRepository crudUserRepository;
 
+    @Autowired
     public DataJpaMealRepository(CrudMealRepository crudRepository, CrudUserRepository crudUserRepository) {
         this.crudRepository = crudRepository;
         this.crudUserRepository = crudUserRepository;

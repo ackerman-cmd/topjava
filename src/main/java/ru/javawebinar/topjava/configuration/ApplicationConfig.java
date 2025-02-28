@@ -11,8 +11,8 @@ import javax.cache.configuration.MutableConfiguration;
 import javax.cache.spi.CachingProvider;
 
 @Configuration
-@ComponentScan(basePackages = "ru.javawebinar.topjava")
-@Import({JpaConfig.class, HsqldbConfig.class, JdbcConfig.class})
+@Import({JpaConfig.class, JdbcConfig.class, HsqldbConfig.class })
+@ComponentScan(basePackages = "ru.javawebinar.topjava.service")
 public class ApplicationConfig {
 
     @Bean

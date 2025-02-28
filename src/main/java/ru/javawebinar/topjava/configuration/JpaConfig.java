@@ -17,8 +17,8 @@ import java.util.Properties;
 import java.util.logging.LogManager;
 
 @Configuration
-@ComponentScan(basePackages = "ru.javawebinar.**.repository.datajpa")
-@EnableJpaRepositories(basePackages = "ru.javawebinar.**.repository.datajpa")
+@EnableJpaRepositories(basePackages = "ru.javawebinar.topjava.repository.datajpa")
+@ComponentScan(basePackages = {"ru.javawebinar.topjava.repository.jpa", "ru.javawebinar.topjava.repository.datajpa"})
 @EnableTransactionManagement
 @Profile("datajpa")
 @PropertySource("classpath:db/postgres.properties")
@@ -54,6 +54,11 @@ public class JpaConfig {
     }
 
     @PostConstruct
+    public void init() {
+        System.out.println("JpaConfig загружен!");
+    }
+
+    @PostConstruct
     public static void  configureLogging() {
         LogManager.getLogManager().reset();
         System.setProperty("java.util.logging.manager", "org.apache.logging.slf4j.Log4jBridgeHandler");
@@ -63,7 +68,7 @@ public class JpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan("ru.javawebinar.**.model");
+        em.setPackagesToScan("ru.javawebinar.topjava.model");
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
 
