@@ -4,7 +4,7 @@
 <%--<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>--%>
 
 <html>
-<jsp:include page="fragments/headTag.jsp"/>
+ <jsp:include page="fragments/headTag.jsp"/>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <br>
@@ -17,6 +17,6 @@
         <button type="submit"><spring:message code="common.select"/></button>
     </form>
 </section>
-<jsp:include page="fragments/footer.jsp"/>
+<%--<jsp:include page="fragments/footer.jsp"/>--%>
 </body>
 </html>

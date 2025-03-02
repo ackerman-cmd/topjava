@@ -1,13 +1,18 @@
 package ru.javawebinar.topjava.configuration;
 
-
+import jakarta.servlet.Filter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
+
+import java.util.Locale;
+
 
 @Configuration
 @EnableWebMvc
@@ -30,7 +35,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("file:///#{systemEnvironment[TOPJAVA_ROOT]}/config/messages/app");
+        messageSource.setBasenames("classpath:messages/app", "classpath:messages/jsp");
+//        "file:///#{systemEnvironment[TOPJAVA_ROOT]}/config/messages/app"
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setCacheSeconds(5);
         messageSource.setFallbackToSystemLocale(false);

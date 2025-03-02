@@ -1,8 +1,10 @@
 package ru.javawebinar.topjava.configuration;
 
+import jakarta.servlet.Filter;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -14,16 +16,24 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     }
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{ApplicationConfig.class}; // Корневая конфигурация app
+        return new Class[]{ApplicationConfig.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{WebConfig.class}; // Подключаем конфигурацию Spring MVC
+        return new Class[]{WebConfig.class};
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"}; // Все запросы отправляются в DispatcherServlet
+        return new String[]{"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setEncoding("UTF-8");
+        encodingFilter.setForceEncoding(true);
+        return new Filter[]{encodingFilter};
     }
 }
